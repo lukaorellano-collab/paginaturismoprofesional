@@ -1,0 +1,1785 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Norte Argentino — Salta & Tilcara | Turismo Premium NOA</title>
+  <meta name="description" content="Descubrí el Noroeste Argentino. Salta y Tilcara: naturaleza, cultura, aventura y gastronomía en el corazón de los Andes." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cinzel:wght@400;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Josefin+Sans:wght@200;300;400;600&display=swap" rel="stylesheet" />
+  <style>
+    /* =============================
+#       CSS VARIABLES & RESET
+       ============================= */
+    :root {
+      --ink:        #0e0907;
+      --deep:       #1a100a;
+      --terra:      #8b2e12;
+      --ochre:      #c4762a;
+      --gold:       #d4a853;
+      --sand:       #e8d5b0;
+      --cream:      #f5ede0;
+      --salt:       #f8f5ef;
+      --sky:        #6aa0c4;
+      --sage:       #5a7a5e;
+      --white:      #ffffff;
+      --glass:      rgba(255,255,255,0.06);
+      --glass-b:    rgba(255,255,255,0.12);
+      --r: 0.75rem;
+      --ease: cubic-bezier(0.23, 1, 0.32, 1);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      background: var(--ink);
+      color: var(--cream);
+      font-family: 'Crimson Pro', Georgia, serif;
+      overflow-x: hidden;
+      cursor: none;
+    }
+
+    /* =============================
+#       CUSTOM CURSOR
+       ============================= */
+    .cursor {
+      position: fixed; top: 0; left: 0; width: 12px; height: 12px;
+      background: var(--gold); border-radius: 50%; pointer-events: none;
+      z-index: 9999; transform: translate(-50%,-50%);
+      transition: width 0.3s var(--ease), height 0.3s var(--ease), background 0.3s;
+      mix-blend-mode: difference;
+    }
+    .cursor-ring {
+      position: fixed; top: 0; left: 0; width: 36px; height: 36px;
+      border: 1.5px solid rgba(212,168,83,0.6); border-radius: 50%;
+      pointer-events: none; z-index: 9998; transform: translate(-50%,-50%);
+      transition: transform 0.12s var(--ease), width 0.3s, height 0.3s;
+    }
+    body:hover .cursor { opacity: 1; }
+    a:hover ~ .cursor, button:hover ~ .cursor { width: 22px; height: 22px; }
+
+    /* =============================
+#       SCROLLBAR
+       ============================= */
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--ink); }
+    ::-webkit-scrollbar-thumb { background: var(--ochre); border-radius: 2px; }
+
+    /* =============================
+#       PROGRESS BAR
+       ============================= */
+    #progress-bar {
+      position: fixed; top: 0; left: 0; height: 3px; width: 0%;
+      background: linear-gradient(90deg, var(--terra), var(--gold));
+      z-index: 10000; transition: width 0.1s linear;
+    }
+
+    /* =============================
+#       NAV
+       ============================= */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      padding: 1.4rem 3rem;
+      display: flex; align-items: center; justify-content: space-between;
+      transition: background 0.5s, padding 0.4s;
+    }
+    nav.scrolled {
+      background: rgba(14,9,7,0.92);
+      backdrop-filter: blur(18px);
+      padding: 1rem 3rem;
+      border-bottom: 1px solid rgba(196,118,42,0.2);
+    }
+    .nav-logo {
+      font-family: 'Cinzel', serif;
+      font-size: 1rem; letter-spacing: 0.35em; color: var(--gold);
+      text-decoration: none; text-transform: uppercase;
+    }
+    .nav-links { display: flex; gap: 2.2rem; list-style: none; }
+    .nav-links a {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 0.7rem; letter-spacing: 0.2em; color: var(--sand);
+      text-decoration: none; text-transform: uppercase;
+      transition: color 0.3s;
+      position: relative;
+    }
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: -3px; left: 0;
+      width: 0; height: 1px; background: var(--gold);
+      transition: width 0.4s var(--ease);
+    }
+    .nav-links a:hover { color: var(--gold); }
+    .nav-links a:hover::after { width: 100%; }
+    .nav-cta {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 0.68rem; letter-spacing: 0.25em; text-transform: uppercase;
+      background: var(--terra); color: var(--cream);
+      border: 1px solid var(--terra); padding: 0.6rem 1.5rem;
+      text-decoration: none; border-radius: 1px;
+      transition: background 0.3s, color 0.3s;
+    }
+    .nav-cta:hover { background: transparent; color: var(--terra); }
+
+    /* Mobile nav hamburger */
+    .hamburger {
+      display: none; flex-direction: column; gap: 5px;
+      background: none; border: none; cursor: pointer; padding: 4px;
+    }
+    .hamburger span { display: block; width: 24px; height: 1.5px; background: var(--cream); transition: 0.3s; }
+    .mobile-menu {
+      display: none; position: fixed; inset: 0; background: rgba(14,9,7,0.97);
+      z-index: 999; flex-direction: column; align-items: center; justify-content: center; gap: 2.5rem;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-family: 'Cinzel', serif; font-size: 1.4rem; color: var(--cream);
+      text-decoration: none; letter-spacing: 0.15em;
+      transition: color 0.3s;
+    }
+    .mobile-menu a:hover { color: var(--gold); }
+    .mobile-close {
+      position: absolute; top: 1.5rem; right: 2rem;
+      background: none; border: none; color: var(--sand);
+      font-size: 1.8rem; cursor: pointer;
+    }
+
+    /* =============================
+#       HERO
+       ============================= */
+    #hero {
+      height: 100vh; min-height: 700px;
+      position: relative; overflow: hidden;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(to bottom, rgba(14,9,7,0.2) 0%, rgba(14,9,7,0.65) 60%, rgba(14,9,7,1) 100%),
+        url('https://images.unsplash.com/photo-1584949514490-73fc2aa98ccc?w=1800&q=90');
+      background-size: cover; background-position: center 30%;
+      transform: scale(1.08);
+      transition: transform 0.1s linear;
+      will-change: transform;
+    }
+    .hero-content {
+      position: relative; z-index: 2;
+      text-align: center; padding: 0 1.5rem;
+      display: flex; flex-direction: column; align-items: center;
+    }
+    .hero-tag {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 0.7rem; letter-spacing: 0.45em; color: var(--gold);
+      text-transform: uppercase; margin-bottom: 1.8rem;
+      opacity: 0; transform: translateY(20px);
+      animation: fadeUp 1s 0.3s var(--ease) forwards;
+      display: flex; align-items: center; gap: 1rem;
+    }
+    .hero-tag::before, .hero-tag::after {
+      content: ''; display: block; width: 40px; height: 1px; background: var(--gold);
+    }
+    h1.hero-title {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: clamp(2.6rem, 8vw, 6.5rem);
+      line-height: 1.05; font-weight: 700;
+      color: var(--cream); margin-bottom: 1rem;
+      opacity: 0; transform: translateY(30px);
+      animation: fadeUp 1.1s 0.55s var(--ease) forwards;
+      text-shadow: 0 4px 40px rgba(0,0,0,0.5);
+    }
+    h1.hero-title em { color: var(--gold); font-style: normal; }
+    .hero-sub {
+      font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+      color: var(--sand); font-weight: 300; max-width: 600px;
+      line-height: 1.7; margin-bottom: 2.8rem;
+      opacity: 0; transform: translateY(30px);
+      animation: fadeUp 1.1s 0.75s var(--ease) forwards;
+      font-style: italic;
+    }
+    .hero-btns {
+      display: flex; gap: 1.2rem; flex-wrap: wrap; justify-content: center;
+      opacity: 0; transform: translateY(30px);
+      animation: fadeUp 1s 1s var(--ease) forwards;
+    }
+    .btn-primary {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 0.72rem; letter-spacing: 0.3em; text-transform: uppercase;
+      background: var(--terra); color: var(--cream);
+      border: 1px solid var(--terra); padding: 1rem 2.5rem;
+      text-decoration: none; border-radius: 1px;
+      transition: all 0.4s var(--ease);
+      position: relative; overflow: hidden;
+    }
+    .btn-primary::before {
+      content: ''; position: absolute; inset: 0;
+      background: var(--gold); transform: scaleX(0); transform-origin: left;
+      transition: transform 0.4s var(--ease);
+    }
+    .btn-primary:hover::before { transform: scaleX(1); }
+    .btn-primary span { position: relative; z-index: 1; }
+    .btn-secondary {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 0.72rem; letter-spacing: 0.3em; text-transform: uppercase;
+      background: transparent; color: var(--cream);
+      border: 1px solid rgba(255,255,255,0.35); padding: 1rem 2.5rem;
+      text-decoration: none; border-radius: 1px;
+      transition: all 0.4s var(--ease);
+    }
+    .btn-secondary:hover {
+      background: rgba(255,255,255,0.08); border-color: var(--cream);
+    }
+    .hero-scroll {
+      position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+      opacity: 0; animation: fadeIn 1s 1.5s forwards;
+    }
+    .hero-scroll span {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 0.6rem; letter-spacing: 0.3em; color: var(--sand); text-transform: uppercase;
+    }
+    .scroll-line {
+      width: 1px; height: 50px; background: linear-gradient(to bottom, var(--gold), transparent);
+      animation: scrollPulse 1.8s infinite;
+    }
+
+    /* =============================
+#       SECTION COMMONS
+       ============================= */
+    section { position: relative; }
+    .section-label {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 0.65rem; letter-spacing: 0.45em; color: var(--ochre);
+      text-transform: uppercase; margin-bottom: 0.8rem;
+      display: flex; align-items: center; gap: 0.8rem;
+    }
+    .section-label::before { content: ''; display: block; width: 30px; height: 1px; background: var(--ochre); }
+    h2.section-title {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(2rem, 5vw, 3.8rem);
+      line-height: 1.1; font-weight: 600;
+      color: var(--cream); margin-bottom: 1.5rem;
+    }
+    h2.section-title em { color: var(--gold); font-style: normal; }
+    .section-body {
+      font-size: 1.15rem; line-height: 1.9; color: var(--sand);
+      max-width: 680px; font-weight: 300;
+    }
+    .reveal {
+      opacity: 0; transform: translateY(50px);
+      transition: opacity 0.9s var(--ease), transform 0.9s var(--ease);
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-left {
+      opacity: 0; transform: translateX(-60px);
+      transition: opacity 0.9s var(--ease), transform 0.9s var(--ease);
+    }
+    .reveal-left.visible { opacity: 1; transform: translateX(0); }
+    .reveal-right {
+      opacity: 0; transform: translateX(60px);
+      transition: opacity 0.9s var(--ease), transform 0.9s var(--ease);
+    }
+    .reveal-right.visible { opacity: 1; transform: translateX(0); }
+    .delay-1 { transition-delay: 0.15s !important; }
+    .delay-2 { transition-delay: 0.3s !important; }
+    .delay-3 { transition-delay: 0.45s !important; }
+    .delay-4 { transition-delay: 0.6s !important; }
+    .delay-5 { transition-delay: 0.75s !important; }
+
+    /* =============================
+#       INTRO / NOA
+       ============================= */
+    #intro {
+      padding: 7rem 3rem;
+      background: var(--ink);
+      display: grid; grid-template-columns: 1fr 1fr; gap: 6rem;
+      align-items: center; max-width: 1300px; margin: 0 auto;
+    }
+    .intro-stats {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;
+      margin-top: 3rem;
+    }
+    .stat-box {
+      border: 1px solid rgba(196,118,42,0.25);
+      padding: 1.5rem; border-radius: 2px;
+      background: var(--glass);
+      transition: border-color 0.3s, background 0.3s;
+    }
+    .stat-box:hover {
+      border-color: var(--ochre); background: var(--glass-b);
+    }
+    .stat-number {
+      font-family: 'Cinzel', serif; font-size: 2.2rem;
+      color: var(--gold); line-height: 1;
+    }
+    .stat-label {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 0.65rem; letter-spacing: 0.2em; color: var(--sand);
+      text-transform: uppercase; margin-top: 0.4rem;
+    }
+    .intro-img-wrap {
+      position: relative; border-radius: 2px; overflow: hidden;
+      height: 560px;
+    }
+    .intro-img-wrap img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform 0.8s var(--ease);
+      filter: brightness(0.85) saturate(1.1);
+    }
+    .intro-img-wrap:hover img { transform: scale(1.04); }
+    .intro-img-caption {
+      position: absolute; bottom: 1.5rem; left: 1.5rem; right: 1.5rem;
+      background: rgba(14,9,7,0.85); backdrop-filter: blur(8px);
+      padding: 1rem 1.2rem; border-left: 2px solid var(--ochre);
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 0.65rem; letter-spacing: 0.2em; color: var(--sand); text-transform: uppercase;
+    }
+
+    /* =============================
+#       GEOGRAPHY STRIPE
+       ============================= */
+    #geo-stripe {
+      background: linear-gradient(135deg, var(--terra) 0%, #6b1a08 100%);
+      padding: 3rem;
+      display: flex; align-items: center; justify-content: space-around;
+      flex-wrap: wrap; gap: 2rem;
+    }
+    .geo-item {
+      text-align: center;
+      padding: 1rem 2rem;
+    }
+    .geo-icon { font-size: 2rem; margin-bottom: 0.5rem; }
+    .geo-value {
+      font-family: 'Cinzel', serif; font-size: 1.5rem; color: var(--cream);
+    }
+    .geo-desc {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 0.62rem; letter-spacing: 0.2em; color: rgba(245,237,224,0.7);
+      text-transform: uppercase; margin-top: 0.3rem;
+    }
+
+    /* =============================
+#       DESTINATIONS — TWO BIG CARDS
+       ============================= */
+    #destinos {
+      padding: 6rem 3rem; max-width: 1300px; margin: 0 auto;
+    }
+    .destinos-header { text-align: center; margin-bottom: 4rem; }
+    .destinos-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;
+    }
+    .destino-card {
+      position: relative; overflow: hidden; border-radius: 3px;
+      height: 600px; cursor: pointer;
+      transition: transform 0.4s var(--ease);
+    }
+    .destino-card:hover { transform: translateY(-6px); }
+    .destino-card img {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      object-fit: cover; transition: transform 0.8s var(--ease);
+      filter: brightness(0.55);
+    }
+    .destino-card:hover img { transform: scale(1.07); }
+    .destino-card-body {
+      position: absolute; inset: 0; padding: 3rem;
+      display: flex; flex-direction: column; justify-content: flex-end;
+      background: linear-gradient(0deg, rgba(14,9,7,0.95) 0%, rgba(14,9,7,0.3) 50%, transparent 100%);
+    }
+    .destino-tag {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 0.62rem; letter-spacing: 0.35em; color: var(--gold);
+      text-transform: uppercase; margin-bottom: 0.7rem;
+    }
+    .destino-name {
+      font-family: 'Cinzel', serif; font-size: 2.4rem;
+      color: var(--cream); line-height: 1.1; margin-bottom: 0.8rem;
+    }
+    .destino-desc {
+      font-size: 1rem; color: var(--sand); line-height: 1.7;
+      max-width: 380px; font-weight: 300; margin-bottom: 1.5rem;
+    }
+    .destino-facts {
+      display: flex; gap: 1.5rem; flex-wrap: wrap; margin-bottom: 1.8rem;
+    }
+    .destino-fact {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 0.62rem; letter-spacing: 0.15em; color: var(--sand);
+      text-transform: uppercase;
+      display: flex; align-items: center; gap: 0.4rem;
+    }
+    .destino-fact::before {
+      content: ''; display: block; width: 6px; height: 6px;
+      border-radius: 50%; background: var(--ochre);
+    }
+    .btn-outline {
+      display: inline-block; font-family: 'Josefin Sans', sans-serif;
+      font-size: 0.65rem; letter-spacing: 0.28em; text-transform: uppercase;
+      border: 1px solid rgba(255,255,255,0.45); color: var(--cream);
+      padding: 0.7rem 1.6rem; text-decoration: none;
+      transition: all 0.35s var(--ease);
+      width: fit-content;
+    }
+    .btn-outline:hover {
+      background: var(--ochre); border-color: var(--ochre);
+    }
+    .destino-alt { border: 1px solid rgba(196,118,42,0.3); background: rgba(14,9,7,0.6); }
+
+    /* =============================
+#       DIVIDER
+       ============================= */
+    .divider {
+      display: flex; align-items: center; gap: 2rem;
+      padding: 2rem 3rem; max-width: 1300px; margin: 0 auto;
+    }
+    .divider-line { flex: 1; height: 1px; background: rgba(196,118,42,0.2); }
+    .divider-icon { color: var(--ochre); font-size: 1.2rem; }
+
+    /* =============================
+#       ATRACTIVOS
+       ============================= */
+    #atractivos {
+      background: var(--deep);
+      padding: 6rem 3rem;
+    }
+    .atractivos-inner { max-width: 1300px; margin: 0 auto; }
+    .atractivos-header { margin-bottom: 4rem; }
+    .atractivos-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;
+    }
+    .atractivo-card {
+      position: relative; overflow: hidden; border-radius: 2px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(196,118,42,0.15);
+      transition: border-color 0.4s, transform 0.4s var(--ease);
+    }
+    .atractivo-card:hover {
+      border-color: var(--ochre); transform: translateY(-5px);
+    }
+    .atractivo-img {
+      width: 100%; height: 260px; object-fit: cover;
+      transition: transform 0.7s var(--ease), filter 0.5s;
+      filter: brightness(0.75) saturate(1.1);
+    }
+    .atractivo-card:hover .atractivo-img { transform: scale(1.08); filter: brightness(0.85); }
+    .atractivo-body { padding: 1.8rem; }
+    .atractivo-type {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 0.6rem; letter-spacing: 0.3em; color: var(--ochre);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .atractivo-name {
+      font-family: 'Cinzel', serif; font-size: 1.2rem;
+      color: var(--cream); margin-bottom: 0.8rem; line-height: 1.3;
+    }
+    .atractivo-desc {
+      font-size: 0.95rem; color: var(--sand); line-height: 1.7;
+      font-weight: 300;
+    }
+    .atractivo-meta {
+      margin-top: 1.2rem; padding-top: 1.2rem;
+      border-top: 1px solid rgba(196,118,42,0.15);
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .atractivo-loc {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 0.6rem; letter-spacing: 0.15em; color: var(--sand);
+      text-transform: uppercase;
+    }
+    .atractivo-badge {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 0.58rem; letter-spacing: 0.1em;
+      background: rgba(196,118,42,0.15); color: var(--ochre);
+      padding: 0.25rem 0.7rem; border-radius: 20px;
+      text-transform: uppercase;
+    }
+    /* Featured card (spans 2 cols) */
+    .atractivo-card.featured { grid-column: span 2; }
+    .atractivo-card.featured .atractivo-img { height: 360px; }
+
+    /* =============================
+#       EXPERIENCIAS / TIPOS DE TURISMO
+       ============================= */
+    #experiencias {
+      padding: 7rem 3rem;
+      max-width: 1300px; margin: 0 auto;
+    }
+    .exp-header { margin-bottom: 4rem; text-align: center; }
+    .exp-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem;
+    }
+    .exp-card {
+      position: relative; overflow: hidden; border-radius: 2px;
+      height: 380px; cursor: pointer;
+    }
+    .exp-card img {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      object-fit: cover; transition: transform 0.7s var(--ease);
+      filter: brightness(0.45) saturate(1.2);
+    }
+    .exp-card:hover img { transform: scale(1.1); filter: brightness(0.6); }
+    .exp-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(0deg, rgba(14,9,7,0.95) 0%, transparent 60%);
+      display: flex; flex-direction: column; justify-content: flex-end;
+      padding: 2rem 1.5rem;
+    }
+    .exp-icon { font-size: 2.2rem; margin-bottom: 0.7rem; }
+    .exp-name {
+      font-family: 'Cinzel', serif; font-size: 1.25rem;
+      color: var(--cream); margin-bottom: 0.5rem;
+    }
+    .exp-desc {
+      font-size: 0.9rem; color: var(--sand); line-height: 1.6;
+      font-weight: 300; max-height: 0; overflow: hidden;
+      transition: max-height 0.5s var(--ease), opacity 0.5s;
+      opacity: 0;
+    }
+    .exp-card:hover .exp-desc { max-height: 120px; opacity: 1; }
+    .exp-tags {
+      display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.8rem;
+    }
+    .exp-tag {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 0.58rem; letter-spacing: 0.12em;
+      background: rgba(196,118,42,0.2); color: var(--gold);
+      padding: 0.2rem 0.6rem; border-radius: 20px; text-transform: uppercase;
+    }
+
+    /* =============================
+#       EXCURSIONES / TIMELINE
+       ============================= */
+    #excursiones {
+      background: var(--deep); padding: 7rem 3rem;
+    }
+    .exc-inner { max-width: 1200px; margin: 0 auto; }
+    .exc-header { margin-bottom: 5rem; text-align: center; }
+    .exc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; }
+    .exc-item { position: relative; }
+    .exc-item-tag {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 0.62rem; letter-spacing: 0.35em; color: var(--ochre);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .exc-item-title {
+      font-family: 'Cinzel', serif; font-size: 1.6rem;
+      color: var(--cream); margin-bottom: 1rem;
+    }
+    .exc-item-meta {
+      display: flex; gap: 2rem; margin-bottom: 1.5rem; flex-wrap: wrap;
+    }
+    .exc-meta-chip {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 0.62rem; letter-spacing: 0.15em; color: var(--sand);
+      text-transform: uppercase;
+      display: flex; align-items: center; gap: 0.4rem;
+    }
+    .exc-meta-chip strong { color: var(--gold); }
+    .exc-timeline { position: relative; padding-left: 1.5rem; }
+    .exc-timeline::before {
+      content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+      width: 1px; background: rgba(196,118,42,0.3);
+    }
+    .timeline-step {
+      position: relative; padding: 0 0 2rem 2rem;
+    }
+    .timeline-step::before {
+      content: ''; position: absolute; left: -0.5rem; top: 0.3rem;
+      width: 10px; height: 10px; border-radius: 50%;
+      background: var(--ochre); border: 2px solid var(--deep);
+    }
+    .timeline-time {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 0.6rem; letter-spacing: 0.2em; color: var(--ochre);
+      text-transform: uppercase; margin-bottom: 0.3rem;
+    }
+    .timeline-text {
+      font-size: 0.95rem; color: var(--sand); line-height: 1.7; font-weight: 300;
+    }
+    .exc-price {
+      margin-top: 1.5rem; padding: 1.2rem 1.5rem;
+      background: rgba(196,118,42,0.1); border: 1px solid rgba(196,118,42,0.3);
+      border-radius: 2px;
+    }
+    .exc-price-label {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 0.6rem; letter-spacing: 0.2em; color: var(--sand); text-transform: uppercase;
+    }
+    .exc-price-value {
+      font-family: 'Cinzel', serif; font-size: 1.3rem; color: var(--gold);
+      margin-top: 0.3rem;
+    }
+    .exc-img {
+      width: 100%; height: 240px; object-fit: cover;
+      border-radius: 2px; margin-bottom: 1.5rem;
+      filter: brightness(0.75); transition: filter 0.4s;
+    }
+    .exc-item:hover .exc-img { filter: brightness(0.9); }
+
+    /* =============================
+#       EVENTOS
+       ============================= */
+    #eventos { padding: 7rem 3rem; max-width: 1300px; margin: 0 auto; }
+    .eventos-header { margin-bottom: 4rem; }
+    .eventos-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    .evento-card {
+      position: relative; overflow: hidden; border-radius: 2px;
+      border: 1px solid rgba(196,118,42,0.2);
+      transition: border-color 0.4s, transform 0.4s;
+    }
+    .evento-card:hover { border-color: var(--gold); transform: translateY(-4px); }
+    .evento-img {
+      width: 100%; height: 220px; object-fit: cover;
+      filter: brightness(0.65) saturate(1.2);
+      transition: transform 0.6s var(--ease), filter 0.4s;
+    }
+    .evento-card:hover .evento-img { transform: scale(1.06); filter: brightness(0.8); }
+    .evento-body { padding: 1.8rem; }
+    .evento-mes {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 0.6rem; letter-spacing: 0.35em; color: var(--gold);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .evento-name {
+      font-family: 'Cinzel', serif; font-size: 1.15rem;
+      color: var(--cream); margin-bottom: 0.8rem;
+    }
+    .evento-desc {
+      font-size: 0.92rem; color: var(--sand); line-height: 1.7; font-weight: 300;
+    }
+    .evento-badge {
+      display: inline-block; margin-top: 1rem;
+      font-family: 'Josefin Sans', sans-serif; font-size: 0.58rem;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      background: rgba(139,46,18,0.3); color: var(--terra);
+      padding: 0.3rem 0.8rem; border-radius: 20px;
+      border: 1px solid rgba(139,46,18,0.4);
+    }
+
+    /* =============================
+#       INFO PRÁCTICA / TRANSPORT
+       ============================= */
+    #info {
+      background: linear-gradient(170deg, var(--deep) 0%, #0a0503 100%);
+      padding: 7rem 3rem;
+    }
+    .info-inner { max-width: 1200px; margin: 0 auto; }
+    .info-header { margin-bottom: 4rem; text-align: center; }
+    .transport-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-bottom: 4rem;
+    }
+    .transport-card {
+      background: var(--glass);
+      border: 1px solid rgba(196,118,42,0.2); border-radius: 3px;
+      padding: 2.5rem 2rem;
+      transition: border-color 0.4s, background 0.4s;
+    }
+    .transport-card:hover {
+      border-color: var(--ochre); background: var(--glass-b);
+    }
+    .transport-icon { font-size: 2.5rem; margin-bottom: 1.2rem; }
+    .transport-mode {
+      font-family: 'Cinzel', serif; font-size: 1.3rem;
+      color: var(--cream); margin-bottom: 0.5rem;
+    }
+    .transport-time {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 0.65rem; letter-spacing: 0.25em; color: var(--gold);
+      text-transform: uppercase; margin-bottom: 1rem;
+    }
+    .transport-desc {
+      font-size: 0.95rem; color: var(--sand); line-height: 1.7; font-weight: 300;
+      margin-bottom: 1.5rem;
+    }
+    .transport-price {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 0.62rem; letter-spacing: 0.15em; color: var(--sand);
+      text-transform: uppercase;
+    }
+    .transport-price strong { color: var(--gold); font-size: 0.85rem; }
+    .transport-pros {
+      list-style: none; margin-top: 1rem;
+    }
+    .transport-pros li {
+      font-size: 0.88rem; color: var(--sand); padding: 0.3rem 0;
+      padding-left: 1.2rem; position: relative;
+    }
+    .transport-pros li::before {
+      content: '→'; position: absolute; left: 0; color: var(--ochre);
+    }
+    .info-table-wrap {
+      overflow-x: auto; border-radius: 2px;
+      border: 1px solid rgba(196,118,42,0.2);
+    }
+    table.info-table {
+      width: 100%; border-collapse: collapse;
+      font-size: 0.95rem;
+    }
+    .info-table thead {
+      background: rgba(139,46,18,0.3);
+    }
+    .info-table th {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--sand); padding: 1rem 1.5rem; text-align: left;
+      border-bottom: 1px solid rgba(196,118,42,0.3);
+    }
+    .info-table td {
+      padding: 0.9rem 1.5rem; color: var(--sand);
+      border-bottom: 1px solid rgba(196,118,42,0.1);
+    }
+    .info-table tr:last-child td { border-bottom: none; }
+    .info-table tr:hover td { background: rgba(196,118,42,0.05); }
+    .info-table td:first-child {
+      font-family: 'Josefin Sans', sans-serif;
+      color: var(--cream); font-size: 0.85rem; letter-spacing: 0.05em;
+    }
+    .price-highlight { color: var(--gold); font-family: 'Cinzel', serif; }
+
+    /* =============================
+#       QUOTE BANNER
+       ============================= */
+    #quote-banner {
+      min-height: 500px; position: relative; overflow: hidden;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .quote-bg {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(14,9,7,0.7), rgba(14,9,7,0.7)),
+        url('https://images.unsplash.com/photo-1600289031464-74d374b64991?w=1800&q=80');
+      background-size: cover; background-position: center;
+      background-attachment: fixed;
+    }
+    .quote-content {
+      position: relative; z-index: 2; text-align: center;
+      max-width: 900px; padding: 4rem 3rem;
+    }
+    .big-quote {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: clamp(1.5rem, 4vw, 3rem);
+      color: var(--cream); line-height: 1.4;
+      margin-bottom: 1.5rem;
+    }
+    .big-quote em { color: var(--gold); font-style: normal; }
+    .quote-source {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 0.7rem; letter-spacing: 0.35em; color: var(--sand);
+      text-transform: uppercase;
+    }
+
+    /* =============================
+#       CTA FINAL
+       ============================= */
+    #cta {
+      padding: 8rem 3rem; text-align: center;
+      background: linear-gradient(170deg, #0f0704 0%, var(--ink) 100%);
+      position: relative; overflow: hidden;
+    }
+    #cta::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at center, rgba(196,118,42,0.08) 0%, transparent 70%);
+    }
+    .cta-label {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 0.68rem; letter-spacing: 0.5em; color: var(--ochre);
+      text-transform: uppercase; margin-bottom: 1.5rem;
+    }
+    .cta-title {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: clamp(2rem, 6vw, 4.5rem);
+      color: var(--cream); margin-bottom: 1.5rem; line-height: 1.15;
+    }
+    .cta-title em { color: var(--gold); font-style: normal; }
+    .cta-body {
+      font-size: 1.1rem; color: var(--sand); max-width: 540px;
+      margin: 0 auto 3rem; line-height: 1.8; font-weight: 300; font-style: italic;
+    }
+    .cta-btns {
+      display: flex; gap: 1.2rem; justify-content: center; flex-wrap: wrap;
+    }
+    .btn-gold {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 0.72rem; letter-spacing: 0.3em; text-transform: uppercase;
+      background: var(--gold); color: var(--ink);
+      border: none; padding: 1.1rem 2.8rem;
+      cursor: pointer; border-radius: 1px;
+      transition: all 0.4s var(--ease);
+      position: relative; overflow: hidden;
+    }
+    .btn-gold:hover { background: var(--ochre); letter-spacing: 0.4em; }
+    .cta-ornament {
+      position: absolute; bottom: 3rem; left: 50%; transform: translateX(-50%);
+      display: flex; align-items: center; gap: 2rem;
+    }
+    .ornament-line { width: 80px; height: 1px; background: rgba(196,118,42,0.3); }
+    .ornament-diamond {
+      width: 8px; height: 8px; background: var(--ochre);
+      transform: rotate(45deg);
+    }
+
+    /* =============================
+#       FOOTER
+       ============================= */
+    footer {
+      background: #080503; border-top: 1px solid rgba(196,118,42,0.15);
+      padding: 3rem; text-align: center;
+    }
+    .footer-logo {
+      font-family: 'Cinzel', serif;
+      font-size: 1.2rem; color: var(--gold); letter-spacing: 0.3em;
+      margin-bottom: 0.8rem;
+    }
+    .footer-tagline {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 0.62rem; letter-spacing: 0.3em; color: var(--sand);
+      text-transform: uppercase; margin-bottom: 1.5rem;
+    }
+    .footer-links {
+      display: flex; gap: 2rem; justify-content: center;
+      list-style: none; flex-wrap: wrap; margin-bottom: 2rem;
+    }
+    .footer-links a {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 0.62rem; letter-spacing: 0.2em; color: var(--sand);
+      text-decoration: none; text-transform: uppercase;
+      transition: color 0.3s;
+    }
+    .footer-links a:hover { color: var(--gold); }
+    .footer-copy {
+      font-size: 0.8rem; color: rgba(232,213,176,0.35);
+    }
+
+    /* =============================
+#       PARALLAX SECTION
+       ============================= */
+    .parallax-section {
+      min-height: 350px; position: relative; overflow: hidden;
+      display: flex; align-items: center;
+    }
+    .parallax-bg {
+      position: absolute; inset: -20%; width: 100%; height: 140%;
+      background-size: cover; background-position: center;
+      background-attachment: fixed;
+    }
+    .parallax-overlay {
+      position: absolute; inset: 0;
+      background: rgba(14,9,7,0.6);
+    }
+    .parallax-text {
+      position: relative; z-index: 2;
+      padding: 3rem; max-width: 800px;
+    }
+
+    /* =============================
+#       TOAST NOTIFICATION
+       ============================= */
+    .toast {
+      position: fixed; bottom: 2rem; right: 2rem; z-index: 9000;
+      background: rgba(20,12,8,0.95); border: 1px solid var(--ochre);
+      padding: 1rem 1.5rem; border-radius: 3px;
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 0.7rem; letter-spacing: 0.15em; color: var(--gold);
+      text-transform: uppercase; backdrop-filter: blur(10px);
+      transform: translateY(100px); opacity: 0;
+      transition: transform 0.5s var(--ease), opacity 0.5s;
+    }
+    .toast.show { transform: translateY(0); opacity: 1; }
+
+    /* =============================
+#       ANIMATIONS
+       ============================= */
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-12px); }
+    }
+    @keyframes spin-slow {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Ornamental spinner */
+    .ornament-spin {
+      width: 80px; height: 80px; margin: 2rem auto;
+      border: 1px solid rgba(196,118,42,0.4); border-radius: 50%;
+      position: relative;
+    }
+    .ornament-spin::before, .ornament-spin::after {
+      content: ''; position: absolute;
+    }
+    .ornament-spin::before {
+      inset: 6px; border: 1px solid rgba(196,118,42,0.25); border-radius: 50%;
+    }
+    .ornament-spin::after {
+      top: 50%; left: 50%; width: 8px; height: 8px;
+      background: var(--ochre); border-radius: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    /* =============================
+#       RESPONSIVE
+       ============================= */
+    @media (max-width: 1100px) {
+      #intro { grid-template-columns: 1fr; gap: 3rem; padding: 5rem 2rem; }
+      .intro-img-wrap { height: 380px; }
+      .atractivos-grid { grid-template-columns: repeat(2, 1fr); }
+      .atractivo-card.featured { grid-column: span 1; }
+      .atractivo-card.featured .atractivo-img { height: 260px; }
+      .exp-grid { grid-template-columns: repeat(2, 1fr); }
+      .transport-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 800px) {
+      nav { padding: 1.2rem 1.5rem; }
+      .nav-links, .nav-cta { display: none; }
+      .hamburger { display: flex; }
+      #destinos { padding: 4rem 1.5rem; }
+      .destinos-grid { grid-template-columns: 1fr; }
+      .destino-card { height: 480px; }
+      .atractivos-grid { grid-template-columns: 1fr; }
+      .exp-grid { grid-template-columns: 1fr 1fr; }
+      .exc-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .eventos-grid { grid-template-columns: 1fr; }
+      .transport-grid { grid-template-columns: 1fr; }
+      #geo-stripe { flex-direction: column; text-align: center; }
+      .divider { padding: 1.5rem; }
+      #info, #excursiones, #experiencias, #eventos, #atractivos { padding: 4rem 1.5rem; }
+      .quote-bg { background-attachment: scroll; }
+    }
+    @media (max-width: 500px) {
+      .exp-grid { grid-template-columns: 1fr; }
+      h1.hero-title { font-size: 2.2rem; }
+      .hero-btns { flex-direction: column; align-items: center; }
+      nav { padding: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Cursor -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursor-ring"></div>
+
+<!-- Progress Bar -->
+<div id="progress-bar"></div>
+
+<!-- Toast -->
+<div class="toast" id="toast">✦ Tu viaje al Norte te espera</div>
+
+<!-- Navigation -->
+<nav id="main-nav">
+  <a href="#" class="nav-logo">NOA ✦ Argentina</a>
+  <ul class="nav-links">
+    <li><a href="#destinos">Destinos</a></li>
+    <li><a href="#atractivos">Atractivos</a></li>
+    <li><a href="#excursiones">Excursiones</a></li>
+    <li><a href="#eventos">Eventos</a></li>
+    <li><a href="#info">Planificar</a></li>
+  </ul>
+  <a href="#cta" class="nav-cta">Planificar viaje</a>
+  <button class="hamburger" id="hamburger" aria-label="Abrir menú">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobile-menu">
+  <button class="mobile-close" id="mobile-close">✕</button>
+  <a href="#destinos" class="mobile-link">Destinos</a>
+  <a href="#atractivos" class="mobile-link">Atractivos</a>
+  <a href="#excursiones" class="mobile-link">Excursiones</a>
+  <a href="#eventos" class="mobile-link">Eventos</a>
+  <a href="#info" class="mobile-link">Información</a>
+  <a href="#cta" class="mobile-link">Planificar viaje →</a>
+</div>
+
+<!-- ========================
+#     HERO
+#     ======================== -->
+<section id="hero">
+  <div class="hero-bg" id="hero-bg"></div>
+  <div class="hero-content">
+    <div class="hero-tag">Noroeste Argentino</div>
+    <h1 class="hero-title">Descubrí el<br/><em>Norte</em> Argentino</h1>
+    <p class="hero-sub">Paisajes de otro mundo, cultura milenaria y cielos sin fin.<br/>Salta & Tilcara te esperan.</p>
+    <div class="hero-btns">
+      <a href="#destinos" class="btn-primary"><span>Explorar destinos</span></a>
+      <a href="#info" class="btn-secondary">Planificar viaje</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <span>Descubrí</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ========================
+#     GEO STRIPE
+#     ======================== -->
+<div id="geo-stripe">
+  <div class="geo-item reveal">
+    <div class="geo-icon">🏔️</div>
+    <div class="geo-value">4.220 m</div>
+    <div class="geo-desc">Altitud máxima</div>
+  </div>
+  <div class="geo-item reveal delay-1">
+    <div class="geo-icon">👥</div>
+    <div class="geo-value">+2 mill.</div>
+    <div class="geo-desc">Visitantes por año</div>
+  </div>
+  <div class="geo-item reveal delay-2">
+    <div class="geo-icon">🏛️</div>
+    <div class="geo-value">UNESCO</div>
+    <div class="geo-desc">Patrimonio Mundial</div>
+  </div>
+  <div class="geo-item reveal delay-3">
+    <div class="geo-icon">🌄</div>
+    <div class="geo-value">5 Provincias</div>
+    <div class="geo-desc">Región NOA</div>
+  </div>
+  <div class="geo-item reveal delay-4">
+    <div class="geo-icon">🦙</div>
+    <div class="geo-value">500 años</div>
+    <div class="geo-desc">Historia andina</div>
+  </div>
+</div>
+
+<!-- ========================
+#     INTRO
+#     ======================== -->
+<section>
+  <div id="intro">
+    <div>
+      <p class="section-label reveal">La Región</p>
+      <h2 class="section-title reveal delay-1">Un mosaico de<br/><em>paisajes y culturas</em></h2>
+      <p class="section-body reveal delay-2">
+        El Noroeste Argentino concentra una convergencia única: paisajes naturales de gran diversidad, una profunda herencia cultural precolombina e hispánica, y una identidad popular viva que se expresa en tradiciones, gastronomía, música y artesanías.
+      </p>
+      <p class="section-body reveal delay-2" style="margin-top:1.2rem;">
+        Desde las selvas húmedas de yungas en las laderas orientales de los Andes, pasando por valles templados con viñedos, hasta la imponente Puna que supera los 3.500 metros —con salares, volcanes y lagunas de flamencos.
+      </p>
+      <div class="intro-stats">
+        <div class="stat-box reveal delay-3">
+          <div class="stat-number">650K</div>
+          <div class="stat-label">Habitantes Salta Capital</div>
+        </div>
+        <div class="stat-box reveal delay-3">
+          <div class="stat-number">7.500</div>
+          <div class="stat-label">Habitantes Tilcara</div>
+        </div>
+        <div class="stat-box reveal delay-4">
+          <div class="stat-number">1.187m</div>
+          <div class="stat-label">Altitud Salta Capital</div>
+        </div>
+        <div class="stat-box reveal delay-4">
+          <div class="stat-number">2.461m</div>
+          <div class="stat-label">Altitud Tilcara</div>
+        </div>
+      </div>
+    </div>
+    <div class="intro-img-wrap reveal-right">
+      <img src="https://images.unsplash.com/photo-1612825173281-9a193378527e?w=900&q=85" alt="Quebrada de Humahuaca, Jujuy"/>
+      <div class="intro-img-caption">Quebrada de Humahuaca — Patrimonio Mundial UNESCO</div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================
+#     DESTINOS
+#     ======================== -->
+<section id="destinos">
+  <div class="destinos-header">
+    <p class="section-label reveal" style="justify-content:center;">Centros Receptivos</p>
+    <h2 class="section-title reveal delay-1">Dos destinos,<br/><em>una sola experiencia</em></h2>
+    <p class="section-body reveal delay-2" style="margin: 0 auto; text-align:center;">
+      Salta Capital y Tilcara se complementan para ofrecer la experiencia completa del Norte argentino.
+    </p>
+  </div>
+  <div class="destinos-grid">
+
+    <!-- SALTA -->
+    <div class="destino-card reveal-left">
+      <img src="https://images.unsplash.com/photo-1599059813005-11265ba4b4ce?w=900&q=85" alt="Salta Capital"/>
+      <div class="destino-card-body">
+        <div class="destino-tag">Centro Receptivo Principal</div>
+        <div class="destino-name">Salta<br/>«La Linda»</div>
+        <p class="destino-desc">Metrópoli regional de referencia con uno de los cascos históricos coloniales mejor conservados de Sudamérica. Declarado Monumento Histórico Nacional.</p>
+        <div class="destino-facts">
+          <span class="destino-fact">1.187 m.s.n.m.</span>
+          <span class="destino-fact">Prov. de Salta</span>
+          <span class="destino-fact">+250 alojamientos</span>
+          <span class="destino-fact">Cultural · Naturaleza · Enoturismo</span>
+        </div>
+        <a href="#info" class="btn-outline">Descubrir Salta →</a>
+      </div>
+    </div>
+
+    <!-- TILCARA -->
+    <div class="destino-card reveal-right">
+      <img src="https://images.unsplash.com/photo-1566559532226-bc9aa7f10d23?w=900&q=85" alt="Tilcara Quebrada de Humahuaca"/>
+      <div class="destino-card-body">
+        <div class="destino-tag">Patrimonio Mundial UNESCO</div>
+        <div class="destino-name">Tilcara<br/>Quebrada Sagrada</div>
+        <p class="destino-desc">En el corazón de la Quebrada de Humahuaca. Un destino de escala humana con fuerte identidad comunitaria y arqueología viva de 800 años.</p>
+        <div class="destino-facts">
+          <span class="destino-fact">2.461 m.s.n.m.</span>
+          <span class="destino-fact">Prov. de Jujuy</span>
+          <span class="destino-fact">+80 alojamientos</span>
+          <span class="destino-fact">Arqueológico · Vivencial · Aventura</span>
+        </div>
+        <a href="#info" class="btn-outline">Descubrir Tilcara →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================
+#     ATRACTIVOS
+#     ======================== -->
+<section id="atractivos">
+  <div class="atractivos-inner">
+    <div class="atractivos-header">
+      <p class="section-label reveal">Atractivos de la Región</p>
+      <h2 class="section-title reveal delay-1">Los grandes<br/><em>escenarios del NOA</em></h2>
+      <p class="section-body reveal delay-2">Seis maravillas que transformarán tu manera de ver Argentina.</p>
+    </div>
+    <div class="atractivos-grid">
+
+      <!-- CERRO 7 COLORES — Featured -->
+      <div class="atractivo-card featured reveal">
+        <img class="atractivo-img" src="https://images.unsplash.com/photo-1569074187119-c87815b476da?w=1200&q=85" alt="Cerro 7 Colores Purmamarca"/>
+        <div class="atractivo-body">
+          <div class="atractivo-type">Natural · Sagrado Andino</div>
+          <div class="atractivo-name">Cerro de los Siete Colores</div>
+          <p class="atractivo-desc">La imagen más icónica del NOA. Capas sedimentarias que exhiben rojo, ocre, amarillo, morado, verde, blanco y gris: el resultado de millones de años de historia geológica. Un espacio sagrado para las comunidades originarias. A sus pies, el pueblo colonial de Purmamarca con su mercado artesanal.</p>
+          <div class="atractivo-meta">
+            <span class="atractivo-loc">📍 Purmamarca, Jujuy · 2.324 m.s.n.m.</span>
+            <span class="atractivo-badge">Acceso libre</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- PUCARA -->
+      <div class="atractivo-card reveal delay-1">
+        <img class="atractivo-img" src="https://images.unsplash.com/photo-1608836412817-5b3f83d38a88?w=900&q=85" alt="Pucará de Tilcara"/>
+        <div class="atractivo-body">
+          <div class="atractivo-type">Cultural · Arqueológico</div>
+          <div class="atractivo-name">Pucará de Tilcara</div>
+          <p class="atractivo-desc">Fortaleza prehispánica de los siglos XII–XV, con más de 8 hectáreas y 2.000 estructuras. Declarado Monumento Histórico Nacional. Vista panorámica de la Quebrada desde su cima.</p>
+          <div class="atractivo-meta">
+            <span class="atractivo-loc">📍 Tilcara, Jujuy</span>
+            <span class="atractivo-badge">$3.500–5.000 ARS</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- SALINAS GRANDES -->
+      <div class="atractivo-card reveal delay-2">
+        <img class="atractivo-img" src="https://images.unsplash.com/photo-1548013146-72479768bada?w=900&q=85" alt="Salinas Grandes Argentina"/>
+        <div class="atractivo-body">
+          <div class="atractivo-type">Natural · Salar de altura</div>
+          <div class="atractivo-name">Salinas Grandes</div>
+          <p class="atractivo-desc">212 km² de blancura absoluta a 3.450 m.s.n.m. Cuando llueve, el salar se convierte en un espejo perfecto del cielo. Flamencos rosados y vicuñas habitan sus bordes. Cielos nocturnos espectaculares.</p>
+          <div class="atractivo-meta">
+            <span class="atractivo-loc">📍 Puna Jujeña-Salteña</span>
+            <span class="atractivo-badge">$2.000–3.500 ARS</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- QUEBRADA CAFAYATE -->
+      <div class="atractivo-card reveal delay-1">
+        <img class="atractivo-img" src="https://images.unsplash.com/photo-1625562399462-86264fad4fd3?w=900&q=85" alt="Quebrada de Cafayate"/>
+        <div class="atractivo-body">
+          <div class="atractivo-type">Natural · Geológico</div>
+          <div class="atractivo-name">Quebrada de Cafayate</div>
+          <p class="atractivo-desc">50 km de cañón escultural sobre la RN 68. El río modeló la roca roja durante millones de años creando formaciones únicas: El Anfiteatro, La Garganta del Diablo, Los Castillos. Al final: bodegas de Torrontés.</p>
+          <div class="atractivo-meta">
+            <span class="atractivo-loc">📍 Sur de Salta, RN 68</span>
+            <span class="atractivo-badge">Itinerario escénico</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- CASCO HISTORICO -->
+      <div class="atractivo-card reveal delay-2">
+        <img class="atractivo-img" src="https://images.unsplash.com/photo-1559825481-12a05cc00344?w=900&q=85" alt="Casco histórico Salta"/>
+        <div class="atractivo-body">
+          <div class="atractivo-type">Cultural · Colonial</div>
+          <div class="atractivo-name">Centro Histórico de Salta</div>
+          <p class="atractivo-desc">Plaza 9 de Julio, Catedral Basílica, Cabildo e Iglesia San Francisco (campanario de 53 m). El MAAM exhibe las momias incaicas del Llullaillaco: una de las colecciones arqueológicas más impactantes del mundo.</p>
+          <div class="atractivo-meta">
+            <span class="atractivo-loc">📍 Salta Capital</span>
+            <span class="atractivo-badge">Patrimonio Nacional</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- TREN A LAS NUBES — Featured -->
+      <div class="atractivo-card featured reveal">
+        <img class="atractivo-img" src="https://images.unsplash.com/photo-1539635278303-d4002c07eae3?w=1200&q=85" alt="Tren a las Nubes Salta"/>
+        <div class="atractivo-body">
+          <div class="atractivo-type">Cultural · Ingeniería ferroviaria</div>
+          <div class="atractivo-name">Tren a las Nubes</div>
+          <p class="atractivo-desc">Uno de los recorridos ferroviarios más espectaculares del mundo. Asciende de 1.187 a 4.220 m.s.n.m. mediante 21 túneles, 13 viaductos y 29 puentes —sin cremallera— hasta el impresionante Viaducto La Polvorilla: 224 metros de metal flotando sobre la Puna. Monumento Histórico Nacional.</p>
+          <div class="atractivo-meta">
+            <span class="atractivo-loc">📍 Salta → Puna Salteña · 4.220 m.s.n.m.</span>
+            <span class="atractivo-badge">$90.000–180.000 ARS</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ========================
+#     EXPERIENCIAS
+#     ======================== -->
+<section id="experiencias" style="background: var(--ink);">
+  <div class="exp-header">
+    <p class="section-label reveal" style="justify-content:center;">Tipos de Turismo</p>
+    <h2 class="section-title reveal delay-1">Elegí tu<br/><em>experiencia</em></h2>
+  </div>
+  <div class="exp-grid">
+    <div class="exp-card reveal">
+      <img src="https://images.unsplash.com/photo-1518638150340-f706e86654de?w=800&q=80" alt="Turismo Cultural"/>
+      <div class="exp-overlay">
+        <div class="exp-icon">🏛️</div>
+        <div class="exp-name">Cultural</div>
+        <div class="exp-desc">Cascos históricos coloniales, arqueología incaica, museos de clase mundial. La historia del Imperio Inca y la colonia española convergen en cada rincón.</div>
+        <div class="exp-tags">
+          <span class="exp-tag">Colonial</span>
+          <span class="exp-tag">Arqueología</span>
+          <span class="exp-tag">Museos</span>
+        </div>
+      </div>
+    </div>
+    <div class="exp-card reveal delay-1">
+      <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80" alt="Naturaleza"/>
+      <div class="exp-overlay">
+        <div class="exp-icon">🌄</div>
+        <div class="exp-name">Naturaleza</div>
+        <div class="exp-desc">Puna, yungas, valles y salares. Un paisaje de altitud variable que va de los 400 a los 4.200 metros, con ecosistemas únicos en el mundo.</div>
+        <div class="exp-tags">
+          <span class="exp-tag">Puna</span>
+          <span class="exp-tag">Salares</span>
+          <span class="exp-tag">Fauna</span>
+        </div>
+      </div>
+    </div>
+    <div class="exp-card reveal delay-2">
+      <img src="https://images.unsplash.com/photo-1551632811-561732d1e306?w=800&q=80" alt="Aventura"/>
+      <div class="exp-overlay">
+        <div class="exp-icon">🧗</div>
+        <div class="exp-name">Aventura</div>
+        <div class="exp-desc">Senderismo, trekking, rafting, cabalgatas, mountain bike y parapente. El relieve andino es el escenario perfecto para el turismo activo.</div>
+        <div class="exp-tags">
+          <span class="exp-tag">Trekking</span>
+          <span class="exp-tag">Rafting</span>
+          <span class="exp-tag">Cabalgatas</span>
+        </div>
+      </div>
+    </div>
+    <div class="exp-card reveal delay-3">
+      <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&q=80" alt="Gastronomía"/>
+      <div class="exp-overlay">
+        <div class="exp-icon">🌽</div>
+        <div class="exp-name">Gastronomía</div>
+        <div class="exp-desc">Locro, humita, empanadas salteñas, carne de llama, quínoa y Torrontés de altura. Peñas folclóricas y cocina de autor con identidad andina.</div>
+        <div class="exp-tags">
+          <span class="exp-tag">Locro</span>
+          <span class="exp-tag">Llama</span>
+          <span class="exp-tag">Enoturismo</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================
+#     PARALLAX QUOTE 1
+#     ======================== -->
+<div class="parallax-section">
+  <div class="parallax-bg" style="background-image: linear-gradient(rgba(14,9,7,0.6),rgba(14,9,7,0.6)), url('https://images.unsplash.com/photo-1564507592333-c60657eea523?w=1600&q=80'); background-attachment: fixed;"></div>
+  <div class="parallax-overlay"></div>
+  <div class="parallax-text" style="padding: 5rem 3rem;">
+    <p class="section-label reveal">El Camino del Inca</p>
+    <h2 class="section-title reveal delay-1" style="max-width:600px;">El <em>Qhapaq Ñan</em> atraviesa el NOA<br/>—Patrimonio UNESCO 2014—</h2>
+    <p class="section-body reveal delay-2" style="max-width:500px;">La región conserva vestigios de la cultura Tiwanaku, la expansión del Imperio Inca y la posterior colonización española. Una superposición de civilizaciones único en el mundo.</p>
+  </div>
+</div>
+
+<!-- ========================
+#     EXCURSIONES
+#     ======================== -->
+<section id="excursiones">
+  <div class="exc-inner">
+    <div class="exc-header">
+      <p class="section-label reveal" style="justify-content:center;">Excursiones Destacadas</p>
+      <h2 class="section-title reveal delay-1">Los <em>itinerarios</em><br/>que no podés perderte</h2>
+    </div>
+    <div class="exc-grid">
+
+      <!-- EXC 1: QUEBRADA HUMAHUACA -->
+      <div class="exc-item reveal-left">
+        <img class="exc-img" src="https://images.unsplash.com/photo-1612825173281-9a193378527e?w=900&q=80" alt="Quebrada de Humahuaca"/>
+        <div class="exc-item-tag">Desde Tilcara</div>
+        <div class="exc-item-title">Quebrada de Humahuaca</div>
+        <div class="exc-item-meta">
+          <span class="exc-meta-chip">⏱ <strong>8–10 hs.</strong></span>
+          <span class="exc-meta-chip">🗺 Día completo</span>
+          <span class="exc-meta-chip">🚐 Con guía habilitado</span>
+        </div>
+        <div class="exc-timeline">
+          <div class="timeline-step">
+            <div class="timeline-time">08:00 hs — Salida</div>
+            <div class="timeline-text">Partida desde Tilcara en vehículo con guía habilitado, rumbo norte por la Quebrada.</div>
+          </div>
+          <div class="timeline-step">
+            <div class="timeline-time">09:30 hs — Maimará</div>
+            <div class="timeline-text">Parada en la colorida Paleta del Pintor, formación geológica similar a los Siete Colores.</div>
+          </div>
+          <div class="timeline-step">
+            <div class="timeline-time">11:00 hs — Humahuaca</div>
+            <div class="timeline-text">Iglesia de la Candelaria (s. XVII), Cabildo y el Monumento a la Independencia con el «Indio» que emerge al mediodía.</div>
+          </div>
+          <div class="timeline-step">
+            <div class="timeline-time">13:00 hs — Almuerzo</div>
+            <div class="timeline-text">Gastronomía andina en restaurante local: locro, tamales, quínoa.</div>
+          </div>
+          <div class="timeline-step">
+            <div class="timeline-time">15:00 hs — Purmamarca</div>
+            <div class="timeline-text">Mercado artesanal y circuito peatonal alrededor del Cerro de los Siete Colores (1 hora).</div>
+          </div>
+          <div class="timeline-step">
+            <div class="timeline-time">18:30 hs — Regreso</div>
+            <div class="timeline-text">Retorno a Tilcara con la luz dorada del atardecer sobre la Quebrada.</div>
+          </div>
+        </div>
+        <div class="exc-price">
+          <div class="exc-price-label">Precio estimado por persona (2025)</div>
+          <div class="exc-price-value">$35.000 — $65.000 ARS</div>
+        </div>
+      </div>
+
+      <!-- EXC 2: VALLES CALCHAQUÍES -->
+      <div class="exc-item reveal-right">
+        <img class="exc-img" src="https://images.unsplash.com/photo-1625562399462-86264fad4fd3?w=900&q=80" alt="Valles Calchaquíes Cafayate"/>
+        <div class="exc-item-tag">Desde Salta Capital</div>
+        <div class="exc-item-title">Valles Calchaquíes & Cafayate</div>
+        <div class="exc-item-meta">
+          <span class="exc-meta-chip">⏱ <strong>10–12 hs.</strong></span>
+          <span class="exc-meta-chip">🗺 Día completo</span>
+          <span class="exc-meta-chip">🍷 Incluye bodega</span>
+        </div>
+        <div class="exc-timeline">
+          <div class="timeline-step">
+            <div class="timeline-time">07:30 hs — Salida</div>
+            <div class="timeline-text">Partida desde Salta por RN 68 rumbo sur hacia la Quebrada de las Conchas.</div>
+          </div>
+          <div class="timeline-step">
+            <div class="timeline-time">09:30 hs — Quebrada de las Conchas</div>
+            <div class="timeline-text">Paradas en Los Castillos, La Garganta del Diablo, El Anfiteatro (demostración acústica) y El Sapo.</div>
+          </div>
+          <div class="timeline-step">
+            <div class="timeline-time">13:00 hs — Cafayate</div>
+            <div class="timeline-text">Visita guiada a Bodega Etchart o El Esteco. Degustación de Torrontés y Malbec de altura.</div>
+          </div>
+          <div class="timeline-step">
+            <div class="timeline-time">14:30 hs — Almuerzo & Plaza</div>
+            <div class="timeline-text">Gastronomía local y recorrida por la Plaza Central, boutiques de vino y Museo de la Vid y el Vino.</div>
+          </div>
+          <div class="timeline-step">
+            <div class="timeline-time">16:00 hs — Regreso</div>
+            <div class="timeline-text">Retorno por RN 68 con luz de tarde sobre las formaciones rojas. Arribo a Salta ~20:00 hs.</div>
+          </div>
+        </div>
+        <div class="exc-price">
+          <div class="exc-price-label">Precio estimado por persona (2025)</div>
+          <div class="exc-price-value">$55.000 — $95.000 ARS</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ========================
+#     EVENTS
+#     ======================== -->
+<section id="eventos" style="background: var(--ink);">
+  <div class="eventos-header">
+    <p class="section-label reveal">Cultura viva</p>
+    <h2 class="section-title reveal delay-1">Festividades &<br/><em>Eventos del NOA</em></h2>
+    <p class="section-body reveal delay-2" style="max-width:600px;">El calendario cultural del Norte argentino es tan vibrante como sus paisajes. Estas celebraciones son experiencias en sí mismas.</p>
+  </div>
+  <div class="eventos-grid">
+
+    <div class="evento-card reveal">
+      <img class="evento-img" src="https://images.unsplash.com/photo-1504270997636-07ddfbd48945?w=800&q=80" alt="Carnaval Quebrada"/>
+      <div class="evento-body">
+        <div class="evento-mes">Febrero — Marzo</div>
+        <div class="evento-name">Carnaval de la Quebrada</div>
+        <p class="evento-desc">El más auténtico de Argentina: raíces andinas prehispánicas, el desentierro y entierro del diablo, comparsas, tinku, chicha y coca como elementos ceremoniales. Tilcara, Humahuaca, Uquía y Purmamarca compiten con sus propias bandas.</p>
+        <span class="evento-badge">Temporada baja — alta demanda</span>
+      </div>
+    </div>
+
+    <div class="evento-card reveal delay-1">
+      <img class="evento-img" src="https://images.unsplash.com/photo-1535378917042-10a22c95931a?w=800&q=80" alt="Pachamama"/>
+      <div class="evento-body">
+        <div class="evento-mes">1° de Agosto</div>
+        <div class="evento-name">Pachamama — Mes de la Tierra</div>
+        <p class="evento-desc">La festividad más profunda del mundo andino. La "corpachada": se abre un agujero en la tierra y se depositan coca, chicha, alimentos para agradecer a la Madre Tierra. Ritual de profundo valor espiritual, abierto al visitante en todas las comunidades del NOA.</p>
+        <span class="evento-badge">Temporada alta · Agosto</span>
+      </div>
+    </div>
+
+    <div class="evento-card reveal delay-2">
+      <img class="evento-img" src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&q=80" alt="Festival Folklore"/>
+      <div class="evento-body">
+        <div class="evento-mes">Mayo · Abril</div>
+        <div class="evento-name">Festival de Folklore & Vendimia Salteña</div>
+        <p class="evento-desc">El Festival Internacional de Folklore reúne los mejores exponentes latinoamericanos con +40.000 espectadores. La Vendimia Salteña en los Valles Calchaquíes celebra la cosecha de Torrontés con degustaciones en bodegas y elección de la Reina Regional.</p>
+        <span class="evento-badge">Temporada media</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ========================
+#     PARALLAX QUOTE
+#     ======================== -->
+<div id="quote-banner">
+  <div class="quote-bg"></div>
+  <div class="quote-content">
+    <p class="section-label reveal" style="justify-content:center; margin-bottom:2rem;">El NOA en cifras</p>
+    <div class="big-quote reveal delay-1">
+      «El NOA es un destino de <em>primer orden</em> en el turismo argentino y latinoamericano, con potencial para seguir creciendo.»
+    </div>
+    <p class="quote-source reveal delay-2">— Ministerio de Turismo y Deportes, Argentina · 2025</p>
+  </div>
+</div>
+
+<!-- ========================
+#     INFO PRÁCTICA
+#     ======================== -->
+<section id="info">
+  <div class="info-inner">
+    <div class="info-header">
+      <p class="section-label reveal" style="justify-content:center;">Desde Rosario</p>
+      <h2 class="section-title reveal delay-1">Cómo llegar al<br/><em>Norte Argentino</em></h2>
+      <p class="section-body reveal delay-2" style="margin:0 auto; text-align:center;">
+        Tres formas de llegar desde Rosario (Santa Fe) hasta Salta Capital y Tilcara.
+      </p>
+    </div>
+
+    <div class="transport-grid">
+      <!-- AVION -->
+      <div class="transport-card reveal">
+        <div class="transport-icon">✈️</div>
+        <div class="transport-mode">Avión</div>
+        <div class="transport-time">~2 horas de vuelo</div>
+        <p class="transport-desc">La opción más rápida y cómoda. Aerolíneas Argentinas y Flybondi operan vuelos directos o con escala en Buenos Aires. Desde el Aeropuerto Islas Malvinas (ROS) al Martín Miguel de Güemes (SLA).</p>
+        <div class="transport-price">Precio estimado I/V: <strong>$80.000 — $350.000 ARS</strong></div>
+        <ul class="transport-pros">
+          <li>Ideal para estadías cortas</li>
+          <li>Múltiples frecuencias semanales</li>
+          <li>Llegada directa a Salta Capital</li>
+          <li>+2 hs. 30 min. en bus hasta Tilcara</li>
+        </ul>
+      </div>
+
+      <!-- OMNIBUS -->
+      <div class="transport-card reveal delay-1">
+        <div class="transport-icon">🚌</div>
+        <div class="transport-mode">Ómnibus</div>
+        <div class="transport-time">14 a 18 horas</div>
+        <p class="transport-desc">La Veloz del Norte, Andesmar y Flechabus operan servicios nocturnos y diurnos por RN 34. El viaje nocturno en cama suite permite aprovechar el día en destino.</p>
+        <div class="transport-price">Por tramo: <strong>$28.000 — $80.000 ARS</strong></div>
+        <ul class="transport-pros">
+          <li>Opción más económica</li>
+          <li>Cama suite y ejecutivo disponibles</li>
+          <li>Salidas casi diarias en temporada alta</li>
+          <li>Rosario–Tilcara: ~18–20 hs. totales</li>
+        </ul>
+      </div>
+
+      <!-- AUTO -->
+      <div class="transport-card reveal delay-2">
+        <div class="transport-icon">🚗</div>
+        <div class="transport-mode">Automóvil</div>
+        <div class="transport-time">13 a 17 horas</div>
+        <p class="transport-desc">Por autopista Rosario-Córdoba, luego RN 9 hasta Salta y continuación por la Quebrada. 1.390 km a Salta / 1.525 km a Tilcara. Ideal en dos etapas con parada en Tucumán.</p>
+        <div class="transport-price">Combustible + peajes: <strong>$120.000+ ARS</strong></div>
+        <ul class="transport-pros">
+          <li>Máxima libertad de movimiento</li>
+          <li>Ideal para grupos familiares</li>
+          <li>Acceso a destinos fuera de circuitos</li>
+          <li>No conducir de noche en serranías</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3 class="section-title reveal" style="font-size:1.8rem; margin-bottom:2rem; text-align:center;">Resumen comparativo</h3>
+    <div class="info-table-wrap reveal delay-1">
+      <table class="info-table">
+        <thead>
+          <tr>
+            <th>Medio</th>
+            <th>Duración aprox.</th>
+            <th>Costo estimado</th>
+            <th>Ventaja principal</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>✈️ Avión</td>
+            <td>~2 hs. (directo)</td>
+            <td class="price-highlight">$80.000–350.000 ARS I/V</td>
+            <td>Rapidez y comodidad</td>
+          </tr>
+          <tr>
+            <td>🚌 Ómnibus</td>
+            <td>14 a 18 hs.</td>
+            <td class="price-highlight">$28.000–80.000 ARS por tramo</td>
+            <td>Económico, cama suite</td>
+          </tr>
+          <tr>
+            <td>🚗 Automóvil</td>
+            <td>13 a 15 hs. (en etapas)</td>
+            <td class="price-highlight">~$120.000+ ARS total</td>
+            <td>Libertad total en destino</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Alojamiento info -->
+    <div style="margin-top: 5rem;">
+      <h3 class="section-title reveal" style="font-size:1.8rem; margin-bottom:2rem; text-align:center;">Planta <em>hotelera</em></h3>
+      <div class="transport-grid">
+        <div class="transport-card reveal">
+          <div class="transport-icon">🏨</div>
+          <div class="transport-mode">Salta Capital</div>
+          <div class="transport-time">+250 establecimientos · 8.500 plazas</div>
+          <ul class="transport-pros" style="margin-top:1rem;">
+            <li>5 hoteles 5 estrellas (Sheraton, Alejandro I)</li>
+            <li>18–22 hoteles 4 estrellas (NH, Hotel Salta)</li>
+            <li>+30 hoteles boutique y posadas</li>
+            <li>+40 hostels para mochileros</li>
+            <li>+300 restaurantes habilitados</li>
+          </ul>
+        </div>
+        <div class="transport-card reveal delay-1">
+          <div class="transport-icon">🏡</div>
+          <div class="transport-mode">Tilcara</div>
+          <div class="transport-time">80–100 establecimientos · 2.500 plazas</div>
+          <ul class="transport-pros" style="margin-top:1rem;">
+            <li>5–8 hoteles boutique 4★ (Posada de Luz)</li>
+            <li>15–20 posadas y hoteles 3★</li>
+            <li>Cabañas de adobe con vistas a la Quebrada</li>
+            <li>+25 hostels de calidad</li>
+            <li>4–6 campings habilitados</li>
+          </ul>
+        </div>
+        <div class="transport-card reveal delay-2">
+          <div class="transport-icon">📅</div>
+          <div class="transport-mode">Temporadas</div>
+          <div class="transport-time">Temporada alta vs. baja</div>
+          <ul class="transport-pros" style="margin-top:1rem;">
+            <li>Alta: Julio–Agosto y Enero–Febrero</li>
+            <li>Descuentos 30–40% en temporada baja</li>
+            <li>Carnaval agota plazas en toda la Quebrada</li>
+            <li>Tren a las Nubes: reservar 30–45 días antes</li>
+            <li>Estadía media Salta: 3–5 noches</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================
+#     CTA FINAL
+#     ======================== -->
+<section id="cta">
+  <div style="position:relative; z-index:2;">
+    <p class="cta-label reveal">Tu aventura comienza aquí</p>
+    <h2 class="cta-title reveal delay-1">Planificá tu viaje<br/>al <em>Norte</em></h2>
+    <p class="cta-body reveal delay-2">
+      El Noroeste Argentino te espera con paisajes de otro planeta, culturas milenarias y una hospitalidad que no vas a encontrar en ningún otro lugar del mundo.
+    </p>
+    <div class="cta-btns reveal delay-3">
+      <button class="btn-gold" onclick="showToast()">Planificar mi viaje</button>
+      <a href="#atractivos" class="btn-secondary" style="padding:1.1rem 2.8rem;">Ver atractivos</a>
+    </div>
+    <div class="ornament-spin reveal delay-4" style="margin-top:4rem;"></div>
+    <div class="cta-ornament">
+      <div class="ornament-line"></div>
+      <div class="ornament-diamond"></div>
+      <div class="ornament-line"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================
+#     FOOTER
+#     ======================== -->
+<footer>
+  <div class="footer-logo">NOA ✦ Argentina</div>
+  <div class="footer-tagline">Salta & Tilcara — Noroeste Argentino</div>
+  <ul class="footer-links">
+    <li><a href="#intro">Región</a></li>
+    <li><a href="#destinos">Destinos</a></li>
+    <li><a href="#atractivos">Atractivos</a></li>
+    <li><a href="#excursiones">Excursiones</a></li>
+    <li><a href="#eventos">Eventos</a></li>
+    <li><a href="#info">Información práctica</a></li>
+  </ul>
+  <p class="footer-copy">Contenido basado en el Informe de Planificación Turística NOA 2025 · Trabajo académico universitario</p>
+</footer>
+
+<!-- ========================
+#     JAVASCRIPT
+#     ======================== -->
+<script>
+  /* -------- CURSOR -------- */
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursor-ring');
+  let mx = 0, my = 0, rx = 0, ry = 0;
+  document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+  function animCursor() {
+    cursor.style.left = mx + 'px'; cursor.style.top = my + 'px';
+    rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12;
+    ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+    requestAnimationFrame(animCursor);
+  }
+  animCursor();
+  document.querySelectorAll('a, button').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      cursor.style.width = '20px'; cursor.style.height = '20px';
+      ring.style.width = '50px'; ring.style.height = '50px';
+    });
+    el.addEventListener('mouseleave', () => {
+      cursor.style.width = '12px'; cursor.style.height = '12px';
+      ring.style.width = '36px'; ring.style.height = '36px';
+    });
+  });
+
+  /* -------- NAV SCROLL -------- */
+  const nav = document.getElementById('main-nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  /* -------- PROGRESS BAR -------- */
+  const pbar = document.getElementById('progress-bar');
+  window.addEventListener('scroll', () => {
+    const h = document.documentElement;
+    const pct = (window.scrollY / (h.scrollHeight - h.clientHeight)) * 100;
+    pbar.style.width = pct + '%';
+  });
+
+  /* -------- HERO PARALLAX -------- */
+  const heroBg = document.getElementById('hero-bg');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY < window.innerHeight) {
+      heroBg.style.transform = `scale(1.08) translateY(${window.scrollY * 0.25}px)`;
+    }
+  });
+
+  /* -------- REVEAL ON SCROLL -------- */
+  const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  revealEls.forEach(el => observer.observe(el));
+
+  /* -------- MOBILE MENU -------- */
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const mobileClose = document.getElementById('mobile-close');
+  hamburger.addEventListener('click', () => mobileMenu.classList.add('open'));
+  mobileClose.addEventListener('click', () => mobileMenu.classList.remove('open'));
+  document.querySelectorAll('.mobile-link').forEach(a => {
+    a.addEventListener('click', () => mobileMenu.classList.remove('open'));
+  });
+
+  /* -------- TOAST -------- */
+  function showToast() {
+    const toast = document.getElementById('toast');
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 3500);
+  }
+  // Show toast after 4 seconds
+  setTimeout(() => {
+    const toast = document.getElementById('toast');
+    toast.textContent = '✦ Scroll para descubrir el Norte Argentino';
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 3500);
+  }, 4000);
+
+  /* -------- SMOOTH ANCHOR -------- */
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+
+  /* -------- STAT NUMBER COUNTER -------- */
+  function animateCount(el, target, suffix) {
+    let start = 0; const dur = 1800;
+    const step = (timestamp) => {
+      if (!start) start = timestamp;
+      const progress = Math.min((timestamp - start) / dur, 1);
+      const val = Math.floor(progress * target);
+      el.textContent = val.toLocaleString() + suffix;
+      if (progress < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  }
+  const statObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const el = e.target;
+        const txt = el.textContent;
+        if (txt.includes('650K')) animateCount(el, 650, 'K');
+        if (txt.includes('7.500')) animateCount(el, 7500, '');
+        statObserver.unobserve(el);
+      }
+    });
+  }, { threshold: 0.5 });
+  document.querySelectorAll('.stat-number').forEach(el => statObserver.observe(el));
+
+  /* -------- CARD TILT EFFECT -------- */
+  document.querySelectorAll('.atractivo-card, .destino-card').forEach(card => {
+    card.addEventListener('mousemove', e => {
+      const r = card.getBoundingClientRect();
+      const x = ((e.clientX - r.left) / r.width - 0.5) * 8;
+      const y = ((e.clientY - r.top) / r.height - 0.5) * -8;
+      card.style.transform = `perspective(800px) rotateY(${x}deg) rotateX(${y}deg) translateY(-5px)`;
+    });
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = '';
+    });
+  });
+</script>
+</body>
+</html>
